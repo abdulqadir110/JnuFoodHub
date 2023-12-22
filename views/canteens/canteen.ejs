@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNU FoodHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/canteenStyle.css">
+    <link rel="stylesheet" href="/css/footer.css"> <!-- CSS file -->
+</head>
+<body>
+    <section id="Home">
+            <nav>
+                <div class="logo">
+                    <img src="image/OIG.z2u3s9pr1Zqf83d.jpeg">
+                </div>
+                <div class="name_of_canteen">
+                    <h1>Welcome to <%= canteen.center %> Canteen</h1>
+                </div>
+
+                <!-- <ul>
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#Menu">Menu</a></li> 
+                    <li><a href="#Gallary">Gallary</a></li>
+                    <li><a href="#Review">Review</a></li>
+                </ul> -->
+                <div>
+                    
+                    <a href="javascript:void(0);" class="cart" onclick="toggleLoginForm()">View Cart<i class="fa-solid fa-cart-shopping"></i></a>
+                    <div class="login-container" id="loginForm"> 
+                        <div class="close" onclick="toggleLoginForm()">&times;</div>
+                        
+                            <!-- section to display the cart items -->
+                            <div class="cart-section">
+                                <h2>Your Cart</h2>
+                                <ul id="cartList"></ul>
+                            </div>
+                        
+                    </div>
+                </div>
+             <div><a class="cart" href="C:/HTML/webAssignment/JNU FOODHUB/checkoutpage/checkout.html" onclick="proceedToCheckout()">Proceed to Checkout <i class="fa-solid fa-cash-register"></i></a>
+             </div>
+            </nav>
+    </section>
+    <div class="menu-container">
+        
+        <div class="menu-item">
+            <img src="image/burger.jpg" alt="Burger" class="menu-image">
+            <h2>Deluxe Burger</h2>
+            <p>A delicious burger with all the fixings.</p>
+            <div class="controls">
+                <input type="number" id="burgerQuantity" min="1" value="1">
+                <span class="price">₹70</span>
+                <button onclick="addToCart('Deluxe Burger', document.getElementById('burgerQuantity').value, 70)">Add to Cart</button>
+            </div>
+        </div>        
+
+        <div class="menu-item">
+            <img src="image/pizza.jpg" alt="Pizza" class="menu-image">
+            <h2>Pepperoni Pizza</h2>
+            <p>A classic pizza topped with pepperoni slices.</p>
+            <div class="controls">
+                <input type="number" id="pizzaQuantity" min="1" value="1">
+                <span class="price">₹100</span>
+                <button onclick="addToCart('Pepperoni Pizza', document.getElementById('pizzaQuantity').value, 100)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="image/spaghetti.jpg" alt="Spaghetti" class="menu-image">
+            <h2>Spaghetti Bolognese</h2>
+            <p>Spaghetti with a rich meat sauce.</p>
+            <div class="controls">
+                <input type="number" id="spaghettiQuantity" min="1" value="1">
+                <span class="price">₹50</span>
+                <button onclick="addToCart('Spaghetti Bolognese', document.getElementById('spaghettiQuantity').value, 50)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="image/samosa.jpg" alt="Samosa" class="menu-image">
+            <h2>Samosa</h2>
+            <p>A popular Indian snack with a crispy pastry shell filled with spiced potatoes.</p>
+            <div class="controls">
+                <input type="number" id="samosaQuantity" min="1" value="1">
+                <span class="price">₹10</span>
+                <button onclick="addToCart('Samosa', document.getElementById('samosaQuantity').value, 10)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="image/tea.jpg" alt="Tea" class="menu-image">
+            <h2>Tea</h2>
+            <p>A hot beverage made from tea leaves.</p>
+            <div class="controls">
+                <input type="number" id="teaQuantity" min="1" value="1">
+                <span class="price">₹10</span>
+                <button onclick="addToCart('Tea', document.getElementById('teaQuantity').value, 10)">Add to Cart</button>
+            </div>
+        </div>        
+
+        <div class="menu-item">
+            <img src="image/coffee.jpg" alt="Coffee" class="menu-image">
+            <h2>Coffee</h2>
+            <p>A brewed beverage made from coffee beans.</p>
+            <div class="controls">
+                <input type="number" id="coffeeQuantity" min="1" value="1">
+                <span class="price">₹20</span>
+                <button onclick="addToCart('Coffee', document.getElementById('coffeeQuantity').value, 20)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="image/paratha.jpg" alt="Aloo Paratha" class="menu-image">
+            <h2>Aloo Paratha</h2>
+            <p>A North Indian dish made of unleavened dough stuffed with spiced mashed potatoes.</p>
+            <div class="controls">
+                <input type="number" id="parathaQuantity" min="1" value="1">
+                <span class="price">₹25</span>
+                <button onclick="addToCart('Aloo Paratha', document.getElementById('parathaQuantity').value, 25)">Add to Cart</button>
+            </div>
+        </div>
+        
+        <% for (let foodItem of canteen.foodItems) { %>
+            <div class="menu-item">
+                <img src="image/<%=foodItem.name%>.jpg" alt="<%= foodItem.name %>image" class="menu-image" >
+                <h2><%= foodItem.name %></h2>
+                <p><%= foodItem.description %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <div class="controls">
+                    <input type="number" id='<%= foodItem.name %>Quantity' min="1" value="1">
+                    <span class="price">₹<%= foodItem.price %></span>
+                    <!-- <button onclick="addToCart('Aloo Paratha', document.getElementById('parathaQuantity').value, 25)">Add to Cart</button> -->
+                    <button onclick="addToCart('<%= foodItem.name %>', document.getElementById('<%= foodItem.name %>Quantity').value, `<%= foodItem.price %>`)">Add to Cart</button>
+                </div>
+            </div>
+        <% } %>
+
+    </div>
+    <!-- Footer -->
+    <%- include("../includes/footer.ejs") %>
+    <script>
+        function toggleLoginForm() {
+           document.getElementById('loginForm').style.right =
+               document.getElementById('loginForm').style.right === '0px' ? '-300px' : '0px';
+       }
+   </script>
+    <script src="/js/canteenScript.js"></script> <!-- JavaScript file -->
+</body>
+</html>

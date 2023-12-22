@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNU FoodHub - Checkout</title>
+    <link rel="stylesheet" href="/css/checkoutStyle.css">
+    <link rel="stylesheet" href="/css/footer.css">
+     <!-- CSS file -->
+</head>
+<body>
+    <h1>Checkout</h1>
+
+    <!-- Display Cart Items -->
+    <div class="cart-section">
+        <h2>Your Cart</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="cartList"></tbody>
+        </table>
+        <div class="total">
+            <h3>Total:</h3>
+            <span id="totalAmount">₹0</span>
+        </div>
+    </div>
+
+    <!-- Additional Information Fields -->
+    <div class="additional-info">
+        <h2>Additional Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required placeholder="Enter your name"><br><br>
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" required placeholder="Enter your number"><br><br>
+        <!-- Add more fields as needed (e.g., address, special instructions, etc.) -->
+    </div>
+
+    <!-- Review and Confirm Order -->
+    <button onclick="confirmOrder()">Confirm Order</button>
+    <div>&nbsp;</div>
+    <%- include("../includes/footer.ejs") %>
+    <script src="/js/checkout.js"></script> <!-- JavaScript file -->
+</body>
+<!-- Add this after the body tag -->
+<div class="modal" id="confirmationModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Order Confirmed!</h2>
+        <p>Thank you for your order. We've received the following details:</p>
+        <div id="orderDetails"></div>
+    </div>
+</div>
+<!-- Add this after the body tag -->
+<div class="loading-indicator" id="loadingIndicator">
+    <div class="spinner"></div>
+</div>
+
+</html>
